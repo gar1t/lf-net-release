@@ -1,0 +1,35 @@
+- model: lfnet
+  operations:
+    demo:
+      description: Run LF-Net demo for a set of images
+      main: run_lfnet --out_dir features
+      requires:
+        - models-lib
+        - pretrained-model
+      flags:
+        images:
+          description: Directory of images
+          type: existing-path
+          arg-name: in_dir
+          required: yes
+    train:
+      description: Train LF-Net
+      main: train_lfnet
+      requires:
+        - sacre-coeur
+        - models-lib
+  resources:
+    models-lib:
+      sources:
+        - models/mso_resnet_detector.py
+        - models/simple_desc.py
+    pretrained-model:
+      sources:
+        - url: http://webhome.cs.uvic.ca/~kyi/files/2018/lf-net/pretrained.tar.gz
+          sha256: 395ca304f54cfcacbb1f58817980096a53bda961c98786f55c567c3b2942e6fa
+    sacre-coeur:
+      sources:
+        - url: http://webhome.cs.uvic.ca/~kyi/files/2018/lf-net/sacre_coeur.tar.gz
+          sha256: fc3f5f77317b0298a45b0be5f83ada6c7f8e03e5b8ee523ea96ee2e4d6a12cd8
+
+- package: lfnet
